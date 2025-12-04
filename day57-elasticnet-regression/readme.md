@@ -15,6 +15,8 @@ $$ J = MSE + r \lambda \sum |\beta| + (1-r) \lambda \sum \beta^2 $$
     - $r=0$: Pure Ridge.
     - $r=0.5$: 50/50 Mix.
 
+ElasticNet encourages grouped selection while retaining sparsity and stability, making it a strong default when feature correlations exist.
+
 ### Why use it?
 Lasso has a flaw: if two features are highly correlated, it picks one randomly and drops the other. ElasticNet (thanks to the Ridge part) tends to keep both or shrink them together. It's more stable than Lasso.
 
@@ -32,6 +34,15 @@ from sklearn.linear_model import ElasticNet
 # l1_ratio=0.5 means 50% Lasso, 50% Ridge
 reg = ElasticNet(alpha=0.005, l1_ratio=0.5)
 reg.fit(X_train, y_train)
+```
+
+### 4.1b CV Tuning
+```python
+from sklearn.linear_model import ElasticNetCV
+enet_cv = ElasticNetCV(l1_ratio=[0.2,0.5,0.8], alphas=None, cv=5, random_state=0)
+enet_cv.fit(X_train, y_train)
+best_alpha = enet_cv.alpha_
+best_ratio = enet_cv.l1_ratio_
 ```
 
 ### 4.2 Results

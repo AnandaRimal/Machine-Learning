@@ -1,4 +1,5 @@
 # Logistic Regression (The Perceptron Trick)
+# Logistic Regression (The Perceptron Trick)
 
 ## 1. Introduction
 Welcome to **Classification**!
@@ -46,6 +47,13 @@ def perceptron(X, y):
 The Perceptron uses a "Step Function" (output 0 or 1).
 $$ 	ext{step}(z) = 1 	ext{ if } z > 0 	ext{ else } 0 $$
 This is harsh. In the next chapter, we'll replace this with the **Sigmoid Function** to create true Logistic Regression.
+
+### 4.3 Towards Logistic Regression
+Replace the step with the smooth **Sigmoid** and optimize with **Gradient Descent** on the **Log-Loss**.
+$$ \sigma(z) = \frac{1}{1+e^{-z}} \quad ; \quad \hat{y} = \sigma(w^T x + b) $$
+Log-Loss:
+$$ J = -\frac{1}{n}\sum \big(y\log(\hat{y}) + (1-y)\log(1-\hat{y})\big) $$
+This yields probabilities, enabling thresholds, ROC curves, and calibration.
 
 ## 5. Summary
 The Perceptron is a linear classifier. It works great if data is linearly separable. If not, it loops forever (unless we stop it). Logistic Regression improves on this by giving us *probabilities* instead of hard 0/1 predictions.
