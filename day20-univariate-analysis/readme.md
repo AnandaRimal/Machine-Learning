@@ -69,4 +69,46 @@ sns.boxplot(df['Age'])
 *Insight*: Points outside the "whiskers" are statistical outliers (e.g., very old passengers).
 
 ## 5. Summary
-Univariate analysis is the "getting to know you" phase of data science. It reveals the personality of each variable, highlighting potential issues like outliers, missing data, or extreme skewness that must be addressed before modeling.
+# Univariate Analysis: Distributions of Single Variables
+
+Figure: Nano Banana – Histogram, KDE, Boxplot trio
+
+**Overview**
+- Inspect one variable at a time: distribution, tails, modality, outliers.
+- Choose visual and numerical summaries to inform preprocessing.
+
+**Math**
+- PDF/KDE: smooth estimate of density $\hat f(x)$.
+- Empirical CDF: $\hat F(x)=\frac{1}{n}\sum \mathbf{1}{\{x_i\le x\}}$.
+- Outlier rules: IQR fences $[Q1-1.5\,IQR,\ Q3+1.5\,IQR]$.
+
+**Pros/Cons**
+- Pros: Simple diagnostics; reveals skew, heavy tails.
+- Cons: Ignores relationships to target/other features.
+
+**Code**
+```python
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('train.csv')
+col = 'Age'
+
+fig, axes = plt.subplots(1,3, figsize=(12,3))
+sns.histplot(df[col], kde=True, ax=axes[0])
+sns.boxplot(x=df[col], ax=axes[1])
+sns.ecdfplot(df[col], ax=axes[2])
+plt.tight_layout()
+```
+
+**Robust Summaries**
+```python
+q1, q3 = df[col].quantile([0.25, 0.75])
+iqr = q3 - q1
+fence_lo, fence_hi = q1 - 1.5*iqr, q3 + 1.5*iqr
+outliers = df[(df[col] < fence_lo) | (df[col] > fence_hi)]
+```
+
+**Summary**
+- Use hist/KDE/boxplots and quantiles to understand individual variable behavior and guide transformations (log, binning, winsorization).

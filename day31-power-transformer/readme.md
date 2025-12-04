@@ -18,6 +18,10 @@ Many models (Linear Regression, KNN, LDA) assume Gaussian data. Power transforms
     - Can be applied to **positive and negative data**.
     - It is the default in Scikit-Learn's `PowerTransformer`.
 
+**Math**
+- Box-Cox: $y(\lambda) = \frac{x^\lambda - 1}{\lambda}$ for $\lambda \ne 0$; $y(0)=\ln x$.
+- Yeo-Johnson generalizes to $x\le 0$; selects $\lambda$ via MLE optimizing Gaussian likelihood.
+
 ### How it works
 The algorithm iterates through different values of lambda ($\lambda$) and checks which one produces the best Normal distribution (using Maximum Likelihood Estimation).
 
@@ -40,15 +44,29 @@ lr.fit(X_train, y_train)
 We use `PowerTransformer` from `sklearn.preprocessing`.
 ```python
 from sklearn.preprocessing import PowerTransformer
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LinearRegression
 
 # method='box-cox' or 'yeo-johnson' (default)
 pt = PowerTransformer(method='box-cox')
 
 X_train_transformed = pt.fit_transform(X_train + 0.00001) # Adding small value for Box-Cox
+
+pre = ColumnTransformer([
+    ('power', PowerTransformer(method='yeo-johnson'), X.columns)
+])
+
+pipe = Pipeline([
+    ('pre', pre),
+    ('model', LinearRegression())
+])
+pipe.fit(X_train, y_train)
+print(pipe.score(X_test, y_test))
 ```
 
 ### 4.3 The Result
 After transformation, the R2 score improves significantly (e.g., from 0.61 to 0.80). This proves that fixing the distribution of features can have a massive impact on model performance.
 
 ## 5. Summary
-Power Transforms are the "heavy artillery" of feature transformation. If `StandardScaler` and `np.log` fail to normalize your data, `PowerTransformer` is your best friend.
+Power Transforms are the "heavy artillery" of feature transformation. Use Yeo-Johnson for general data (including non-positive), Box-Cox for positive-only, and integrate via Pipelines to ensure reproducibility and avoid leakage.

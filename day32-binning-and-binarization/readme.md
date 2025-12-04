@@ -15,6 +15,10 @@ Grouping continuous values into intervals.
     - **K-Means**: Uses clustering to find natural groups.
 - **Supervised Binning**: Uses the target variable to find optimal split points (Decision Trees do this internally).
 
+**Math**
+- Quantile bins: cut points at $Q_{p}$ for $p \in \{\frac{1}{k},\frac{2}{k},...,\frac{k-1}{k}\}$ to equalize bin frequencies.
+- Entropy-based supervised splits: choose threshold $t$ minimizing impurity (e.g., Gini/Entropy) on left/right partitions.
+
 ### Binarization
 A special case of binning with only 2 bins.
 - Example: Converting "Probability" to "Pass/Fail" based on a threshold of 0.5.
@@ -38,6 +42,25 @@ X_train_trf = kbin.fit_transform(X_train)
 ```
 *Impact*: Binning makes the model robust to outliers and noise. It can turn a non-linear relationship into a linear one (for the model).
 
+Integrate with Pipeline:
+```python
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
+
+numeric = ['Age','Fare']
+pre = ColumnTransformer([
+    ('bin', KBinsDiscretizer(n_bins=5, encode='onehot-dense', strategy='quantile'), numeric)
+], remainder='drop')
+
+pipe = Pipeline([
+    ('pre', pre),
+    ('model', LogisticRegression(max_iter=1000))
+])
+pipe.fit(X_train, y_train)
+print(pipe.score(X_test, y_test))
+```
+
 ### 4.2 Binarization with `Binarizer`
 We use `sklearn.preprocessing.Binarizer`.
 ```python
@@ -50,5 +73,12 @@ X_train_trf = trf.fit_transform(X_train)
 ```
 *Use Case*: Useful for image processing (thresholding) or creating binary flags from probabilities.
 
+```python
+# Example: flag high fare
+from sklearn.preprocessing import Binarizer
+trf = Binarizer(threshold=df['Fare'].median())
+df['Fare_high'] = trf.transform(df[['Fare']])
+```
+
 ## 5. Summary
-Binning is a form of **smoothing**. It reduces the noise in the data by sacrificing some precision. It is particularly useful for linear models to capture non-linear patterns.
+Binning is a form of **smoothing**. It reduces noise by sacrificing precision and can linearize non-linear relationships for simple models. Prefer quantile bins for robustness and integrate via Pipelines for reproducibility.

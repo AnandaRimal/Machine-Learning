@@ -36,6 +36,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 We use Scikit-Learn's `StandardScaler`.
 ```python
 from sklearn.preprocessing import StandardScaler
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
+
 scaler = StandardScaler()
 
 # fit() calculates the mean and std on Train data
@@ -44,6 +48,21 @@ scaler.fit(X_train)
 # transform() applies the formula to both Train and Test data
 X_train_scaled = scaler.transform(X_train)
 X_test_scaled = scaler.transform(X_test)
+```
+
+Or integrate scaling with models via Pipelines:
+```python
+numeric = ['Age','EstimatedSalary']
+pre = ColumnTransformer([
+	('num', StandardScaler(), numeric)
+], remainder='drop')
+
+clf = Pipeline([
+	('pre', pre),
+	('model', LogisticRegression(max_iter=1000))
+])
+clf.fit(X_train, y_train)
+print(clf.score(X_test, y_test))
 ```
 
 ### 4.3 Verifying the Result
@@ -57,4 +76,4 @@ The notebook plots the data before and after scaling.
 - **Distributions**: The shape (PDF) of the data is preserved. If it was skewed before, it remains skewed. Standardization does *not* make data Normal; it just centers it.
 
 ## 5. Summary
-Standardization is the default scaling technique for most algorithms (SVM, Logistic Regression, Neural Networks). It is robust to outliers and essential for model performance.
+Standardization is the default scaling technique for many algorithms (SVM, Logistic Regression, Neural Networks). It improves optimization and distance computations. Use train-only fit to avoid leakage, and prefer pipelines for reproducibility.

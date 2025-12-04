@@ -12,6 +12,11 @@ CCA is only safe to use if:
 1.  **Data is Missing Completely At Random (MCAR)**: The missingness has no pattern and is unrelated to any other variable.
 2.  **Missing data is small**: Usually, if less than 5% of the data is missing, CCA is acceptable.
 
+**Missingness Taxonomy (Math/Concepts)**
+- MCAR: $P(M=1\mid X,Y)=P(M=1)$; deletion unbiased but reduces power.
+- MAR: $P(M=1\mid X,Y)=P(M=1\mid X)$; CCA can bias if missingness depends on observed features.
+- MNAR: $P(M=1\mid Y)$; CCA often severely biased.
+
 ### The Risks
 - **Data Loss**: If you have many columns with small amounts of missing data, you might end up deleting 50% of your rows.
 - **Bias**: If the data is *not* MCAR (e.g., rich people refuse to share their salary), deleting those rows introduces bias.
@@ -35,6 +40,11 @@ new_df = df[cols].dropna()
 ```
 We compare the shape of `df` vs `new_df` to see how much data we lost.
 
+```python
+loss = 1 - (len(new_df)/len(df))
+print(f"Rows dropped: {loss:.2%}")
+```
+
 ### 4.3 Verifying Distribution
 **Crucial Step**: We must check if dropping rows changed the distribution of the data. We plot histograms of the original vs. the new data.
 ```python
@@ -44,6 +54,13 @@ new_df['training_hours'].hist(color='green', density=True, alpha=0.8)
 ```
 *Insight*: If the red and green histograms overlap perfectly, CCA was safe. If they diverge, we introduced bias.
 
+```python
+# Statistical test: compare means/variances
+import scipy.stats as stats
+print(stats.ttest_ind(df['training_hours'].dropna(), new_df['training_hours']))
+```
+
 ## 5. Summary
 CCA is the "nuclear option" for missing data. It's quick and easy, but use it with caution. Always verify that you haven't broken the statistical properties of your dataset.
+ Prefer imputation when MAR/MNAR is suspected; if using CCA, quantify loss, test distributional shifts, and document rationale.
 

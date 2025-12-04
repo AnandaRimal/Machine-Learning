@@ -40,6 +40,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 We use Scikit-Learn's `MinMaxScaler`.
 ```python
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.linear_model import LogisticRegression
 scaler = MinMaxScaler()
 
 # fit() learns the min and max of the Train data
@@ -50,10 +53,33 @@ X_train_scaled = scaler.transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 ```
 
+Pipelines keep scaling tied to the model:
+```python
+numeric = X.columns.tolist()
+pre = ColumnTransformer([
+    ('num', MinMaxScaler(), numeric)
+], remainder='drop')
+
+clf = Pipeline([
+    ('pre', pre),
+    ('model', LogisticRegression(max_iter=1000))
+])
+clf.fit(X_train, y_train)
+print(clf.score(X_test, y_test))
+```
+
 ### 4.3 The Outlier Problem
 The notebook demonstrates a critical weakness of Normalization: **Outliers**.
 If you have a salary column with values [10k, 20k, 30k, 10M], the 10M outlier becomes 1.0, and the rest of the data gets squashed into a tiny range like [0.001, 0.003]. This destroys the variance in the majority of your data.
 *Insight*: Always check for and handle outliers before using Min-Max Scaling.
+
+```python
+# Winsorize to mitigate extreme outliers before scaling
+import numpy as np
+q_lo, q_hi = X_train.quantile([0.01, 0.99])
+X_train_clipped = X_train.clip(lower=q_lo, upper=q_hi, axis=1)
+X_test_clipped = X_test.clip(lower=q_lo, upper=q_hi, axis=1)
+```
 
 ### 4.4 Visualization
 We plot the data before and after.

@@ -1,4 +1,4 @@
-# Bivariate Analysis
+# Bivariate Analysis: Relationships Between Two Variables
 
 ## 1. Introduction
 While Univariate Analysis looks at variables in isolation, **Bivariate Analysis** explores the relationship between **two** variables. This is where the story of the data begins to unfold. We move from "What is the average age?" to "Does age affect survival chance?". This chapter covers the essential plotting techniques to uncover these hidden connections.
@@ -22,6 +22,15 @@ The choice of visualization depends entirely on the data types of the two variab
     - **Goal**: Find associations or contingency.
     - **Tools**: Heatmap, Crosstab, Stacked Bar Chart.
 
+**Math**
+- Pearson correlation: $r = \frac{\sum (x-\bar x)(y-\bar y)}{\sqrt{\sum (x-\bar x)^2\sum (y-\bar y)^2}}$.
+- Spearman: correlation of ranks; robust to monotonic but nonlinear relations.
+- Chi-square for contingency: $\chi^2 = \sum \frac{(O - E)^2}{E}$; test independence.
+
+**Pros/Cons**
+- Pros: Reveals linear trends, group differences, dependence.
+- Cons: Correlation ignores causality; confounding; nonlinear relations can be missed by Pearson; Simpson’s paradox risks.
+
 ### Multivariate Analysis
 We can often extend these 2D plots to 3D or 4D by adding visual cues like **Color (Hue)**, **Size**, and **Style**. This allows us to see how a third or fourth variable interacts with the primary pair.
 
@@ -39,6 +48,12 @@ The gold standard for correlation.
 sns.scatterplot(tips['total_bill'], tips['tip'], hue=tips['sex'], style=tips['smoker'], size=tips['size'])
 ```
 *Insight*: We see a positive correlation (as bill increases, tip increases). The `hue`, `style`, and `size` parameters add layers of depth, showing how gender, smoking status, and party size affect this relationship.
+
+```python
+num = tips.select_dtypes('number')
+import seaborn as sns
+sns.heatmap(num.corr(), cmap='coolwarm', center=0)
+```
 
 ### 4.2 Numerical - Categorical
 **Bar Plot:**
@@ -71,6 +86,13 @@ sns.heatmap(pd.crosstab(titanic['Pclass'], titanic['Survived']))
 ```
 *Insight*: Shows which combination (e.g., 3rd Class & Died) has the highest count.
 
+```python
+ct = pd.crosstab(titanic['Pclass'], titanic['Survived'])
+from scipy.stats import chi2_contingency
+chi2, p, dof, exp = chi2_contingency(ct)
+print(chi2, p)
+```
+
 ### 4.4 Special Plots
 **Pairplot:**
 A brute-force approach that plots every numerical variable against every other numerical variable.
@@ -87,5 +109,5 @@ sns.lineplot(flights['year'], flights['passengers'])
 *Insight*: Shows the trend (growth) and seasonality (yearly cycles) of air travel.
 
 ## 5. Summary
-Bivariate analysis is the detective work of Data Science. It allows you to hypothesize relationships ("I bet rich people survived more") and prove or disprove them with data ("The barplot confirms 1st class had higher survival").
+Bivariate analysis is the detective work of Data Science. Combine visual exploration with statistical summaries (correlations, chi-square) to validate hypotheses and guide feature engineering.
 
