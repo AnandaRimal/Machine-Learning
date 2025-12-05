@@ -742,5 +742,3 @@ ColumnTransformer([
 Handling mixed variables effectively is essential for building robust, production-ready machine learning systems that can process the heterogeneous data found in real-world applications.
 
 ---
-
-**Video Link**: https://youtu.be/9xiX-I5_LQY
