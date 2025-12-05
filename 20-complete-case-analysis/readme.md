@@ -599,5 +599,3 @@ df.dropna(subset=['col1', 'col2'])  # Specific columns
 Complete Case Analysis remains a useful baseline approach, but modern imputation methods often provide better results by preserving sample size and reducing bias.
 
 ---
-
-**Video Link**: https://youtu.be/aUnNWZorGmk
