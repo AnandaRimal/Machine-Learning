@@ -743,7 +743,3 @@ X_imputed = imputer.fit_transform(X)
 - Model-based: Most flexible, most complex
 
 KNN Imputation provides a practical middle ground between simple statistical methods and complex model-based approaches, leveraging local similarity to produce more accurate and context-aware imputations.
-
----
-
-**Video Link**: https://youtu.be/example_knn_imputer
