@@ -806,5 +806,3 @@ Scikit-learn Pipelines are essential for building robust, reproducible machine l
 Mastering pipelines is crucial for professional machine learning development, ensuring your models are reliable, maintainable, and ready for production deployment.
 
 ---
-
-**Video Link**: https://youtu.be/xOccYkgRV4Q
