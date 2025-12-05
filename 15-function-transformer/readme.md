@@ -830,5 +830,3 @@ Pipeline([
 FunctionTransformer is an essential tool for bridging custom data transformations with sklearn's standardized pipeline framework, enabling clean, maintainable feature engineering workflows.
 
 ---
-
-**Video Link**: https://youtu.be/cTjj3LE8E90
