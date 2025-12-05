@@ -489,5 +489,3 @@ Descriptive statistics are the foundation of data understanding in machine learn
 Understanding descriptive statistics is not just about calculating numbers—it's about developing intuition for data behavior, which guides every subsequent decision in the machine learning pipeline.
 
 ---
-
-**Video Link**: https://www.youtube.com/watch?v=mJlRTUuVr04
