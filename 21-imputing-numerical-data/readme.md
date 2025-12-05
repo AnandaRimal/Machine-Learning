@@ -689,5 +689,3 @@ SimpleImputer(strategy='mean'|'median'|'most_frequent'|'constant')
 Simple imputation is a practical, widely-used approach that provides a reasonable balance between simplicity and effectiveness for handling missing numerical data in machine learning pipelines.
 
 ---
-
-**Video Link**: https://youtu.be/mCL2xLBDw8M
