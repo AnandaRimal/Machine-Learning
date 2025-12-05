@@ -770,5 +770,3 @@ $$x' = \mathbb{1}_{x > threshold}$$
 Binning and binarization are powerful preprocessing techniques that bridge the gap between continuous and categorical data, enabling simpler models to capture complex patterns while improving interpretability and robustness.
 
 ---
-
-**Video Link**: https://youtu.be/kKWsJGKcMvo
