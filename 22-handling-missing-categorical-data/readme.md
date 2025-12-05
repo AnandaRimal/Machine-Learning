@@ -716,5 +716,3 @@ SimpleImputer(strategy='constant', fill_value='Unknown')
 Proper handling of missing categorical data ensures clean preprocessing that maintains data integrity while preparing categories for encoding and modeling.
 
 ---
-
-**Video Link**: https://youtu.be/Ratcir3p03w
