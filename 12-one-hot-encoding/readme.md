@@ -530,5 +530,3 @@ One-hot encoding transforms categorical variables into binary vectors, creating 
 One-hot encoding is fundamental to categorical data handling in machine learning. Understanding when to use it versus alternatives, managing the dummy variable trap, and handling high-cardinality scenarios are essential skills for effective feature engineering.
 
 ---
-
-**Video Link**: https://youtu.be/U5oCv3JKWKA
