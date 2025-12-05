@@ -587,5 +587,3 @@ Bivariate analysis reveals relationships between pairs of variables, essential f
 Bivariate analysis bridges univariate analysis and multivariate modeling, providing insights into feature relationships that guide feature engineering, selection, and model interpretation in machine learning workflows.
 
 ---
-
-**Video link**: https://www.youtube.com/watch?v=4HyTlbHUKSw
