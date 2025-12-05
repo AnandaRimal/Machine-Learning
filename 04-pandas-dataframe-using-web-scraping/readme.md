@@ -616,5 +616,3 @@ Web scraping is a powerful technique for acquiring machine learning data from th
 Web scraping bridges the gap between unstructured web data and structured ML datasets, enabling data scientists to access information not available through traditional APIs. When combined with proper data cleaning and preprocessing, it becomes an invaluable skill for modern machine learning practitioners.
 
 ---
-
-**Video Link**: https://www.youtube.com/watch?v=8NOdgjC1988
