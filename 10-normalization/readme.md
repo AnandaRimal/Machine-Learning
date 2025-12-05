@@ -505,5 +505,3 @@ Min-Max normalization is a simple, interpretable scaling technique that transfor
 Normalization is a fundamental preprocessing tool that, when applied appropriately to clean data, can significantly improve model training and performance, especially in deep learning contexts.
 
 ---
-
-**Video Link**: https://youtu.be/eBrGyuA2MIg
