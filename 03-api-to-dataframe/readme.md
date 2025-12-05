@@ -580,9 +580,7 @@ Key principles:
 
 Mastering API integration enables ML practitioners to leverage external data sources, enrich features, and build production-ready systems that interface with the broader data ecosystem.
 
----
-
-**Video Link**: https://www.youtube.com/watch?v=8NOdgjC1988  
+---  
 **TMDB API**: https://developers.themoviedb.org/  
 **RapidAPI**: https://rapidapi.com/collection/list-of-free-apis  
 **JSON Viewer**: http://jsonviewer.stack.hu/
