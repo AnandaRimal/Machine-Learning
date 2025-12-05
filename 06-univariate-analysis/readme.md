@@ -557,5 +557,3 @@ Univariate analysis is the essential first step in understanding data for machin
 Univariate analysis builds intuition about individual features, which is crucial before examining relationships (bivariate/multivariate analysis) and building predictive models. It ensures data quality, guides preprocessing, and prevents costly mistakes in later stages of the ML pipeline.
 
 ---
-
-**Video Link**: https://www.youtube.com/watch?v=4HyTlbHUKSw
