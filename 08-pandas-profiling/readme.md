@@ -498,5 +498,3 @@ Pandas Profiling automates exploratory data analysis, generating comprehensive s
 **Remember**: Pandas Profiling is a powerful starting point but should complement, not replace, domain-specific analysis and critical thinking about data. Use it to accelerate EDA, identify issues quickly, and ensure comprehensive coverage, then dive deeper into flagged areas with targeted analysis.
 
 ---
-
-**Video Link**: https://www.youtube.com/watch?v=E69Lg2ZgOxg
