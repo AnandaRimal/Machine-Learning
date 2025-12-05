@@ -482,5 +482,3 @@ Ordinal encoding converts ordered categorical variables into integers while pres
 Ordinal encoding is a simple yet powerful technique when applied correctly to truly ordinal variables. Understanding the distinction between ordinal and nominal data, and choosing the appropriate encoding method, is fundamental to successful feature engineering in machine learning.
 
 ---
-
-**Video Link**: https://youtu.be/w2GglmYHfmM
