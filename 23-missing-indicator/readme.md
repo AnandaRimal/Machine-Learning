@@ -684,7 +684,3 @@ SimpleImputer(add_indicator=True)
 - Especially powerful with tree models (capture interactions)
 
 Missing indicators are a simple yet powerful technique to extract additional value from incomplete data by treating the pattern of missingness as a feature in its own right.
-
----
-
-**Video Link**: https://youtu.be/Ratcir3p03w
