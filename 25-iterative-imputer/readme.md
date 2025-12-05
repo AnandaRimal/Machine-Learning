@@ -809,7 +809,3 @@ X_imputed = imputer.fit_transform(X)
 - **vs Model-based**: Similar accuracy, more systematic
 
 Iterative Imputer represents the state-of-the-art in single imputation, providing a principled and highly accurate approach to handling missing data by leveraging the full multivariate structure of the dataset.
-
----
-
-**Video Link**: https://youtu.be/a38ehxv3kyk
