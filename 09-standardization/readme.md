@@ -435,5 +435,3 @@ Standardization (Z-score normalization) is a fundamental preprocessing technique
 Standardization is a simple yet powerful technique that often makes the difference between a model that struggles to converge and one that performs optimally. Understanding when and how to apply it is fundamental to successful machine learning practice.
 
 ---
-
-**Video Link**: https://youtu.be/1Yw9sC0PNwY
